@@ -15,8 +15,10 @@ const {PORT} = process.env
 const StartServer =async ()=>{
 
     try{
-        await sequelize.authenticate();
-
+        await sequelize.authenticate({alter: true});
+        app.get("/", (_,res)=>{
+            res.status(200).json({message: "ok"})
+        })
         console.log("Database is connected")
         app.listen(PORT, ()=>{
         console.log(`BlogAPI Server is running successfully on http://127.0.0.1:${PORT}`)

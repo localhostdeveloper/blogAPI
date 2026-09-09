@@ -1,4 +1,4 @@
-import User from "../database/model/userModel";
+import User from "../database/model/userModel.js";
 
 
 
@@ -21,4 +21,12 @@ export const findUserByUsername = async (username)=>{
 export const findUserByEmail = async (email)=>{
 
     return User.findOne({where: {email: email}})
+}
+
+
+// create new user
+
+export const createUser = async (data)=>{
+
+    return await User.create(data)
 }

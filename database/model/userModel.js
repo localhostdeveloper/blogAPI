@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../dbConnection";
+import sequelize from "../dbConnection.js";
 
 const User = sequelize.define("User", {
     id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         autoIncrement:true,
         primaryKey:true 
     },
@@ -23,11 +23,16 @@ const User = sequelize.define("User", {
     password: {
         type:DataTypes.STRING,
         allowNull:false
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     }
 
     
 
 },
 )
-
+User.sync()
 export default User;
