@@ -6,7 +6,7 @@ import { register } from "../controllers/userController.js";
 const router = Router();
 
 
-router.post("/signup", register);
+router.post("/register", register);
 
 
 export default router;

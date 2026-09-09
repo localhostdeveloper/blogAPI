@@ -8,7 +8,7 @@ export const register = async (req, res)=>{
 // validate request body
 
 const result = await createUserSchema.safeParseAsync(req.body)
-
+    console.log("method:", req.method)
     if (!result.success){
         console.log(result.error)
         return res.status(400).json({error: result.error.message})

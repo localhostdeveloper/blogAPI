@@ -6,7 +6,7 @@ export const createUserSchema = zod.object({
    firstName : zod.string().min(1).trim(),
    lastName:  zod.string().min(1).trim(),
    email: zod.email().trim(),
-   password: zod.string().min(6),
+   password: zod.string({error: "password required"}).min(6),
    username: zod.string().trim()
 
 })
