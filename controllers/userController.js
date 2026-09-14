@@ -7,16 +7,10 @@ export const register = async (req, res)=>{
 
 // validate request body
 
-const result = await createUserSchema.safeParseAsync(req.body)
-    console.log("method:", req.method)
-    if (!result.success){
-        console.log(result.error)
-        return res.status(400).json({error: result.error.message})
-    }
-
+    
     try{
-        const createdUser = await registerUser(result.data)   
-        return res.status(201).json({createdUser})
+        const createdUser = await registerUser(req.body)   
+        return res.status(201).json({"message": "User created successfully", "User": createdUser})
     }
     catch(err){
            return  res.status(500).json({error: err.message})
