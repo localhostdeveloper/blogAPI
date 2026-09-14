@@ -1,9 +1,10 @@
 import { logInUserSchema, createUserSchema } from "../schemas/userSchema.js";
-
+import { config } from "dotenv";
 import { findUserById, findUserByUsername, createUser, findUserByEmail } from "../repositories/userRepositories.js";
+import jwt from "jsonwebtoken"
 
 import bcrypt from "bcryptjs";
-
+config()
 // sanitize new user
 
 const sanitizeUser = (user) =>({
@@ -45,4 +46,26 @@ const hashedpassword = await bcrypt.hash(password, SALT_ROUND)
     // return sanitized value
     return sanitizeUser(userNewUser)
 
+}
+
+
+// login logic 
+
+export const loginUser = async({email, password}) =>{
+ const {JWT_SECRET} = process.env;
+
+    const user = await findUserByEmail(email);
+
+    if (!user || !(await bcrypt.compare(password, user.password))){
+        throw new Error("Invalid email or password")
+    }
+
+
+    const token = jwt.sign(
+        {id: user.id, username: user.username,  email: user.email},
+        JWT_SECRET,
+        {expiresIn: "1d"} )
+
+
+        return {user: sanitizeUser(user), token}
 }
