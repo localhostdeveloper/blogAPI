@@ -1,4 +1,3 @@
-import { logInUserSchema, createUserSchema } from "../schemas/userSchema.js";
 import { config } from "dotenv";
 import { findUserById, findUserByUsername, createUser, findUserByEmail } from "../repositories/userRepositories.js";
 import jwt from "jsonwebtoken"
@@ -68,4 +67,12 @@ export const loginUser = async({email, password}) =>{
 
 
         return {user: sanitizeUser(user), token}
+};
+
+
+export const logUserOut = async(req, res) =>{
+
+
+
+
 }
