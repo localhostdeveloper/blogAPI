@@ -1,5 +1,4 @@
 import { registerUser, loginUser } from "../services/userService.js";
-import { createUserSchema } from "../schemas/userSchema.js";
 
 // register for user registration 
 
